@@ -12,7 +12,13 @@ xkb_keymap {
 };
 ```
 
+## Requirements
+A C compiler and the `X11` development headers. On a debian like system this
+can be acquired by running `# apt-get install libx11-dev make gcc`. If you also
+want to build the manpage you need `help2man` and `gzip`.
+
 ## Usage
+To build the program run `make`
 Read the man page
 
 ## Installation

@@ -1,11 +1,11 @@
 #include <stdio.h>
-#include <string.h>
 #include <stdlib.h>
 #include <getopt.h>
 
 #include <X11/XKBlib.h>
 
 #define err(s) fputs(s "\n", stderr)
+
 static struct option long_opts[] = {
 	{"help", no_argument, 0, 'h'},
 	{"version", no_argument, 0, 'v'},
@@ -24,18 +24,15 @@ void usage(){
 
 int main(int argc, char **argv)
 {
-	int evCode, errRet, rsnRet;
-	char *layouts;
 	Display *disp;
-	int min = XkbMinorVersion;
-	int maj = XkbMajorVersion;
-	char *display = "";
+	char *display;
+	char *layouts;
+	int evCode, errRet, rsnRet;
+	int min = XkbMinorVersion, maj = XkbMajorVersion;
 	int opt;
 
 	while((opt = getopt_long(argc, argv, "hv", long_opts, NULL)) != -1){
 		switch(opt){
-//			case 0:
-//				if(lopt
 			case 'h':
 				usage();
 				return EXIT_SUCCESS;
@@ -47,12 +44,12 @@ int main(int argc, char **argv)
 				break;
 		}
 	}
-	if(optind == argc - 1){
-		display = argv[optind];
-	} else if(optind < argc - 1){
+	if(optind + 1 < argc){
 		err("Too many positional arguments");
 		return EXIT_FAILURE;
 	}
+
+	display = optind + 1 == argc ? argv[optind] : "";
 
 	disp = XkbOpenDisplay(display, &evCode, &errRet, &maj, &min, &rsnRet);
 	if(disp == NULL){

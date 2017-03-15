@@ -5,7 +5,7 @@ PREFIX?=/usr/local
 LDLIBS:=-lX11
 CFLAGS:=-O2 -Werror -Wall -Wextra -pedantic
 
-all: $(BIN) $(BIN).1.gz
+all: $(BIN)
 
 %.1.gz: %
 	help2man --no-discard-stderr -s "KBL" -N ./$< | gzip -9 > $@
