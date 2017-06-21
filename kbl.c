@@ -11,7 +11,8 @@ static struct option long_opts[] = {
 	{"version", no_argument, 0, 'v'},
 	{0, 0, 0, 0}};
 
-void usage(){
+void usage()
+{
 	fputs("Usage: kbl [OPTS] [DISPLAY]\n"
 	      "Prints the current active keyboard layout\n"
 	      "\n"
